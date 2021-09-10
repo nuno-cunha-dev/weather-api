@@ -10,7 +10,7 @@ export default class IpInfoProvider implements IpLocationProviderInterface {
 
   constructor(private readonly configService: ConfigService) {
     this.iPinfoWrapper = new IPinfoWrapper(
-      this.configService.get<string>('IP_INFO_TOKEN'),
+      this.configService.get<string>('ipInfoToken'),
     );
   }
 
