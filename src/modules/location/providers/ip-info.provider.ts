@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import IPinfoWrapper from 'node-ipinfo';
-import { IPinfo } from 'node-ipinfo/dist/src/common';
 import IpLocationProviderInterface from './interfaces/ip-location.interface';
+import { IPinfoWrapper, IPinfo } from 'node-ipinfo';
 
 @Injectable()
 export default class IpInfoProvider implements IpLocationProviderInterface {
