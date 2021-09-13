@@ -11,7 +11,6 @@ export default class LocationController {
 
   @Get()
   async getCity(@RealIP() ip: string): Promise<string> {
-    // return this.ipLocationProvider.getCityByIp(ip);
-    return new Promise((res) => res(ip));
+    return this.ipLocationProvider.getCityByIp(ip);
   }
 }
