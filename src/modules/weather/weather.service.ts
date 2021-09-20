@@ -11,7 +11,7 @@ export default class WeatherService {
     private readonly weatherProvider: WeatherProviderInterface,
   ) {}
 
-  public async getCurrent(ip: string) {
+  public async getCurrent(ip: string): Promise<any> {
     const userLocationDto = await this.ipLocationProvider.getLocationByIp(ip);
     return this.weatherProvider.getCurrentWeather(userLocationDto);
   }

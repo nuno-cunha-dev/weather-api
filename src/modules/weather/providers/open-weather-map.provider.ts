@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { map } from 'rxjs';
+import { lastValueFrom, map } from 'rxjs';
 import UserLocationDto from 'src/modules/location/dto/user-location.dto';
 import WeatherProviderInterface from './interfaces/weather-provider.interface';
 
@@ -20,15 +20,19 @@ export default class OpenWeatherMapProvider
     this.apiUrl = this.configService.get<string>('openWeatherMapApiUrl');
   }
 
-  public getCurrentWeather(userLocationDto: UserLocationDto) {
-    return this.httpService
-      .get(this.apiUrl, {
-        params: {
-          lat: userLocationDto.geoLocation.lat,
-          lon: userLocationDto.geoLocation.lon,
-          appid: this.apiKey,
-        },
-      })
-      .pipe(map((response) => response.data));
+  public async getCurrentWeather(
+    userLocationDto: UserLocationDto,
+  ): Promise<any> {
+    return lastValueFrom(
+      this.httpService
+        .get(this.apiUrl, {
+          params: {
+            lat: userLocationDto.geoLocation.lat,
+            lon: userLocationDto.geoLocation.lon,
+            appid: this.apiKey,
+          },
+        })
+        .pipe(map((response) => response.data)),
+    );
   }
 }

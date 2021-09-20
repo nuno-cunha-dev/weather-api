@@ -4,6 +4,11 @@ import IpLocationProviderInterface from './interfaces/ip-location-provider.inter
 import { IPinfoWrapper, IPinfo } from 'node-ipinfo';
 import UserLocationDto from '../dto/user-location.dto';
 
+enum IpInfoGeoLocation {
+  Latitude = 0,
+  Longitude = 1,
+}
+
 @Injectable()
 export default class IpInfoProvider implements IpLocationProviderInterface {
   private readonly iPinfoWrapper: IPinfoWrapper;
@@ -16,7 +21,6 @@ export default class IpInfoProvider implements IpLocationProviderInterface {
 
   public async getLocationByIp(ip: string): Promise<UserLocationDto> {
     return this.iPinfoWrapper.lookupIp(ip).then((response: IPinfo) => {
-      console.log(response);
       return this.buildUserLocationDto(response);
     });
   }
@@ -31,8 +35,8 @@ export default class IpInfoProvider implements IpLocationProviderInterface {
       country: ipInfo.countryCode,
       city: ipInfo.city,
       geoLocation: {
-        lat: geolocation[0],
-        lon: geolocation[1],
+        lat: geolocation[IpInfoGeoLocation.Latitude],
+        lon: geolocation[IpInfoGeoLocation.Longitude],
       },
     };
   }
