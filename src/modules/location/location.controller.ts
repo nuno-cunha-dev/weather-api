@@ -1,6 +1,7 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import IpLocationProviderInterface from './providers/interfaces/ip-location.interface';
+import IpLocationProviderInterface from './providers/interfaces/ip-location-provider.interface';
 import { RealIP } from 'nestjs-real-ip';
+import UserLocationDto from './dto/user-location.dto';
 
 @Controller('/location')
 export default class LocationController {
@@ -10,7 +11,7 @@ export default class LocationController {
   ) {}
 
   @Get()
-  async getCity(@RealIP() ip: string): Promise<string> {
-    return this.ipLocationProvider.getCityByIp(ip);
+  async getCity(@RealIP() ip: string): Promise<UserLocationDto> {
+    return this.ipLocationProvider.getLocationByIp(ip);
   }
 }
