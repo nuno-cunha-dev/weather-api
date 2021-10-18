@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import IpLocationProviderInterface from './interfaces/ip-location-provider.interface';
+import IpLocationProviderInterface from '../interface/ip-location-provider.interface';
 import { IPinfoWrapper, IPinfo } from 'node-ipinfo';
 import UserLocationDto from '../dto/user-location.dto';
 
@@ -14,9 +14,7 @@ export default class IpInfoProvider implements IpLocationProviderInterface {
   private readonly iPinfoWrapper: IPinfoWrapper;
 
   constructor(private readonly configService: ConfigService) {
-    this.iPinfoWrapper = new IPinfoWrapper(
-      this.configService.get<string>('ipInfoToken'),
-    );
+    this.iPinfoWrapper = new IPinfoWrapper(this.configService.get<string>('ipInfoToken'));
   }
 
   public async getLocationByIp(ip: string): Promise<UserLocationDto> {

@@ -1,7 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import IpInfoProvider from '../location/providers/ip-info.provider';
-import OpenWeatherMapProvider from './providers/open-weather-map.provider';
+import WeatherUnitCalculatorFactory from 'src/common/factory/weather-unit-calculator.factory';
+import OpenWeatherMapProvider from 'src/common/provider/open-weather-map.provider';
+import IpInfoProvider from '../../common/provider/ip-info.provider';
 import WeatherController from './weather.controller';
 import WeatherService from './weather.service';
 
@@ -16,6 +17,10 @@ import WeatherService from './weather.service';
     {
       provide: 'WeatherProviderInterface',
       useClass: OpenWeatherMapProvider,
+    },
+    {
+      provide: 'WeatherUnitCalculatorFactoryInterface',
+      useClass: WeatherUnitCalculatorFactory,
     },
     WeatherService,
   ],

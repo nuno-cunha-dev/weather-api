@@ -1,7 +1,7 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import IpLocationProviderInterface from './providers/interfaces/ip-location-provider.interface';
+import IpLocationProviderInterface from '../../common/interface/ip-location-provider.interface';
 import { RealIP } from 'nestjs-real-ip';
-import UserLocationDto from './dto/user-location.dto';
+import UserLocationDto from '../../common/dto/user-location.dto';
 
 @Controller('/location')
 export default class LocationController {
