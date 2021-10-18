@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import LocationController from './location.controller';
-import IpInfoProvider from './providers/ip-info.provider';
+import IpInfoProvider from '../../common/provider/ip-info.provider';
 
 @Module({
   controllers: [LocationController],
