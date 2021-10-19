@@ -22,7 +22,7 @@ export default class WeatherService {
       weatherDto.temperature = Math.floor(weatherDto.temperature);
 
       // Capitalize first letter
-      weatherDto.description.charAt(0).toUpperCase() + weatherDto.description.slice(1);
+      weatherDto.description = weatherDto.description.charAt(0).toUpperCase() + weatherDto.description.slice(1);
 
       return weatherDto;
     });
