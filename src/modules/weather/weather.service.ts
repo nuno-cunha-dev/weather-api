@@ -21,6 +21,9 @@ export default class WeatherService {
       // Remove decimal places from temperature
       weatherDto.temperature = Math.floor(weatherDto.temperature);
 
+      // Capitalize first letter
+      weatherDto.description.charAt(0).toUpperCase() + weatherDto.description.slice(1);
+
       return weatherDto;
     });
   }
