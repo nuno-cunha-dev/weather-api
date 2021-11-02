@@ -14,17 +14,17 @@ export default class WeatherService {
   ) {}
 
   public async getCurrent(userLocationDto: UserLocationDto): Promise<WeatherDto> {
-    return this.weatherProvider.getCurrentWeather(userLocationDto).then((weatherDto: WeatherDto) => {
-      // Convert allways to celsius (for now)
-      this.weatherUnitCalculatorFactory.getCalculator(weatherDto).toCelsius();
+    const weatherDto: WeatherDto = await this.weatherProvider.getCurrentWeather(userLocationDto);
 
-      // Remove decimal places from temperature
-      weatherDto.temperature = Math.floor(weatherDto.temperature);
+    // Convert allways to celsius (for now)
+    this.weatherUnitCalculatorFactory.getCalculator(weatherDto).toCelsius();
 
-      // Capitalize first letter
-      weatherDto.description = weatherDto.description.charAt(0).toUpperCase() + weatherDto.description.slice(1);
+    // Remove decimal places from temperature
+    weatherDto.temperature = Math.floor(weatherDto.temperature);
 
-      return weatherDto;
-    });
+    // Capitalize first letter
+    weatherDto.description = weatherDto.description.charAt(0).toUpperCase() + weatherDto.description.slice(1);
+
+    return weatherDto;
   }
 }

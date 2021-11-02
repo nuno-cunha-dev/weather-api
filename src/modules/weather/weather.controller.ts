@@ -15,8 +15,9 @@ export default class WeatherController {
 
   @Get('/current')
   async getCurrent(@RealIP() ip: string): Promise<WeatherDto> {
-    return this.ipLocationProvider.getLocationByIp(ip).then((userLocationDto: UserLocationDto) => {
-      return this.weatherService.getCurrent(userLocationDto);
-    });
+    const userLocationDto: UserLocationDto = await this.ipLocationProvider.getLocationByIp(ip);
+
+    // Returns current weather for user's location
+    return this.weatherService.getCurrent(userLocationDto);
   }
 }
